@@ -1,0 +1,5 @@
+interface:
+  display_name: "Repository Progress Tracker"
+  short_description: "Track authorized GitHub repository progress with evidence."
+  default_prompt: "Review only the GitHub repositories I authorize, then summarize their start dates, current stages, recent progress, risks, next steps, confidence, and supporting evidence."
+
