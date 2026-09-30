@@ -1,5 +1,9 @@
 # Track Repository Progress
 
+[繁體中文](#繁體中文) | [English](#english)
+
+## 繁體中文
+
 將一組已授權 GitHub repositories 整理成一致、可追蹤的工作進度報告，並可在使用者明確要求後更新 Google Sheets。
 
 這個 repository 包含可安裝的 ChatGPT／Codex Skill。Skill 不會自動取得 GitHub 或 Google Drive 權限，也不會自行擴大 repository 範圍。
@@ -103,3 +107,109 @@ track-repository-progress/
 - Progress 是有依據的估算，不等同工時完成百分比。
 - Commit 數量只代表活動，不代表品質或商業完成度。
 
+---
+
+## English
+
+Turn an explicit allowlist of GitHub repositories into a consistent, trackable project progress report. The skill can also update Google Sheets when the user explicitly requests it.
+
+This repository contains an installable ChatGPT/Codex skill. Installing the skill does not automatically grant access to GitHub or Google Drive, and the skill never expands the repository scope on its own.
+
+## Features
+
+- Analyze only repositories explicitly authorized by the user
+- Track start dates, current stages, recent activity, completed work, next steps, and risks
+- Separate verified evidence from inference, preventing roadmap plans from being reported as completed work
+- Attach a confidence level to each progress assessment
+- Produce Markdown summaries or Google Sheets-compatible records
+- Write to Google Sheets only when explicitly requested
+
+## Repository Structure
+
+```text
+track-repository-progress/
+├── README.md
+└── skill/
+    ├── SKILL.md
+    ├── agents/
+    │   └── openai.yaml
+    └── references/
+        ├── output-schema.md
+        └── status-model.md
+```
+
+## Installation
+
+### ChatGPT Skills
+
+1. Download this repository:
+
+   ```bash
+   git clone https://github.com/PatrickCOC/track-repository-progress.git
+   ```
+
+2. Create a ZIP archive from the contents of the `skill` directory. `SKILL.md` must be visible at the top level of the ZIP; do not wrap it in an additional `skill/` directory.
+3. Open the **Skills** page in ChatGPT, choose the add/upload option, and upload the ZIP.
+4. Connect GitHub. Connect Google Drive as well if you want the skill to update a spreadsheet.
+
+### Local Codex Installation
+
+Copy the `skill` directory into your personal skills directory and name it `track-repository-progress`:
+
+```text
+<Codex skills directory>/track-repository-progress/SKILL.md
+```
+
+Open a new session, then invoke it explicitly with `@track-repository-progress`. The exact personal skills directory depends on how Codex was installed.
+
+## Usage
+
+Provide a repository allowlist the first time you use the skill. For example:
+
+```text
+Use @track-repository-progress and inspect only these repositories:
+- PatrickCOC/readbar
+- PatrickCOC/game_price_comparison
+- PatrickCOC/touch_fish
+
+Generate a report first. Do not update Google Sheets.
+```
+
+Common prompts:
+
+```text
+Summarize the start date, current stage, recent progress, risks, and next step for each repository.
+```
+
+```text
+Compare this week's repository progress with last week's and flag stalled projects.
+```
+
+```text
+Preview the proposed changes first. Update the Repository Progress Google Sheet only after I confirm them.
+```
+
+## Recommended Google Sheet Columns
+
+| Column | Purpose |
+|---|---|
+| Repository | Exact `owner/name` identifier |
+| Project | Human-readable project name |
+| Start Date | Start date and the evidence used to determine it |
+| Stage | Planning / Prototype / MVP / Beta / Production / Paused / Closed |
+| Progress | Conservative estimate from 0 to 100 |
+| Last Activity | Date of the latest meaningful evidence |
+| Completed | Summary of verified deliverables |
+| Next Step | Closest actionable next step |
+| Risks | Current blockers, costs, or dependencies |
+| Confidence | High / Medium / Low |
+| Evidence | Commit, pull request, release, or document links |
+| Updated At | Report generation time |
+
+## Safety and Limitations
+
+- Repositories outside the allowlist are never explored or added to the report.
+- The skill is read-only by default. Updating a sheet, creating an issue, or modifying a repository requires an explicit user request.
+- Access to private repositories remains limited by the connected GitHub account's permissions.
+- Progress is an evidence-based estimate, not a percentage of engineering hours completed.
+- Commit volume indicates activity, not quality or commercial readiness.
