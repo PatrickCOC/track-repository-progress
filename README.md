@@ -80,30 +80,42 @@ track-repository-progress/
 
 ## 使用方法
 
-第一次使用時，請提供 repository allowlist。例如：
+第一次使用時，在 `report` 後提供 repository allowlist：
 
 ```text
-使用 @track-repository-progress，只檢查以下 repositories：
-- example-org/browser-tool
-- example-org/product-catalog
-- example-org/team-dashboard
-
-先產生報告，不要更新 Google Sheet。
+@track-repository-progress report example-org/browser-tool example-org/product-catalog example-org/team-dashboard
 ```
 
-常用指令：
+之後如目前對話已經有明確 allowlist，可以使用短指令：
 
 ```text
-整理這些 repo 的開始日期、目前階段、最近進度、風險和下一步。
+@track-repository-progress report
 ```
 
 ```text
-比較這星期與上星期的 repository 進度，標示停滯項目。
+@track-repository-progress compare
 ```
 
 ```text
-先預覽將會寫入的資料，得到我確認後才更新 Repository Progress Google Sheet。
+@track-repository-progress preview-sheet
 ```
+
+```text
+@track-repository-progress update-sheet
+```
+
+在支援 slash command 的 agent 使用：
+
+```text
+/track-repository-progress report example-org/browser-tool example-org/product-catalog
+```
+
+| Command | 功能 |
+|---|---|
+| `report` | 產生進度報告，不寫入外部資料 |
+| `compare` | 與上次報告或現有紀錄比較 |
+| `preview-sheet` | 預覽 Google Sheet 變更 |
+| `update-sheet` | 明確寫入指定 Google Sheet |
 
 ## 建議 Google Sheet 欄位
 
@@ -210,30 +222,42 @@ After copying the directory, verify that this file exists:
 
 ## Usage
 
-Provide a repository allowlist the first time you use the skill. For example:
+Provide a repository allowlist after the `report` command the first time you use the skill:
 
 ```text
-Use @track-repository-progress and inspect only these repositories:
-- example-org/browser-tool
-- example-org/product-catalog
-- example-org/team-dashboard
-
-Generate a report first. Do not update Google Sheets.
+@track-repository-progress report example-org/browser-tool example-org/product-catalog example-org/team-dashboard
 ```
 
-Common prompts:
+After an explicit allowlist has been established in the current conversation, use these short commands:
 
 ```text
-Summarize the start date, current stage, recent progress, risks, and next step for each repository.
+@track-repository-progress report
 ```
 
 ```text
-Compare this week's repository progress with last week's and flag stalled projects.
+@track-repository-progress compare
 ```
 
 ```text
-Preview the proposed changes first. Update the Repository Progress Google Sheet only after I confirm them.
+@track-repository-progress preview-sheet
 ```
+
+```text
+@track-repository-progress update-sheet
+```
+
+For agents that support slash commands:
+
+```text
+/track-repository-progress report example-org/browser-tool example-org/product-catalog
+```
+
+| Command | Action |
+|---|---|
+| `report` | Generate a progress report without external writes |
+| `compare` | Compare against the previous report or existing record |
+| `preview-sheet` | Preview proposed Google Sheet changes |
+| `update-sheet` | Explicitly update the specified Google Sheet |
 
 ## Recommended Google Sheet Columns
 
