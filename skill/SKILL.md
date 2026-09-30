@@ -7,6 +7,19 @@ description: Inspect an explicit allowlist of GitHub repositories and produce ev
 
 Track project progress from repository evidence while preserving the user's authorization boundary.
 
+## Commands
+
+Interpret the first argument as one of these English commands:
+
+- `report [owner/repo ...]`: Generate the current progress report without writing external data.
+- `compare [owner/repo ...]`: Compare current evidence with the previous supplied report or existing progress record.
+- `preview-sheet [owner/repo ...]`: Show the exact Google Sheets changes without writing them.
+- `update-sheet [owner/repo ...]`: Write the reviewed progress records to the specified Google Sheet.
+
+For ChatGPT, accept `@track-repository-progress <command>`. For slash-command agents, accept `/track-repository-progress <command>`. If repositories are omitted, reuse only an allowlist explicitly established in the current conversation or trusted configuration. Otherwise ask for the allowlist.
+
+Treat `update-sheet` as explicit authorization to update the specified sheet, but never infer the destination sheet or expand the repository allowlist.
+
 ## Workflow
 
 1. Resolve the repository allowlist from the current request or an explicitly supplied configuration.
@@ -40,4 +53,3 @@ Track project progress from repository evidence while preserving the user's auth
 - Keep evidence URLs or commit identifiers in the Evidence field.
 - State which repositories were included and which authorized repositories could not be read.
 - Never expose credentials, tokens, private configuration, environment files or secret values.
-
