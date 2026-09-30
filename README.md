@@ -55,15 +55,38 @@ track-repository-progress/
 
 重新開啟一個工作階段後，即可用 `@track-repository-progress` 明確呼叫。實際個人 skills 目錄視你的 Codex 安裝方式而定。
 
+### 其他 AI Agent
+
+這個 Skill 採用開放的 Agent Skills 結構。將完整 `skill` 資料夾複製到對應位置，並保留 `SKILL.md`、`references/` 和 `agents/` 的相對結構。
+
+| Agent | Project-level | User-level |
+|---|---|---|
+| 通用 Agent Skills | `.agents/skills/track-repository-progress/` | `~/.agents/skills/track-repository-progress/` |
+| Claude Code | `.claude/skills/track-repository-progress/` | `~/.claude/skills/track-repository-progress/` |
+| Cursor | `.cursor/skills/track-repository-progress/` 或 `.agents/skills/track-repository-progress/` | `~/.cursor/skills/track-repository-progress/` 或 `~/.agents/skills/track-repository-progress/` |
+| GitHub Copilot／VS Code | `.github/skills/track-repository-progress/` 或 `.agents/skills/track-repository-progress/` | `~/.copilot/skills/track-repository-progress/` 或 `~/.agents/skills/track-repository-progress/` |
+
+安裝後，確認以下檔案存在：
+
+```text
+<agent skills directory>/track-repository-progress/SKILL.md
+```
+
+- **Claude Code**：輸入 `/track-repository-progress`，或直接要求 Claude 整理已授權 repositories。
+- **Cursor**：在 Agent chat 輸入 `/` 並選擇這個 Skill；Cursor 亦可按描述自動使用它。
+- **GitHub Copilot／VS Code**：在 Agent chat 以 `/track-repository-progress` 呼叫，或提出符合描述的 repository progress 任務。
+- **其他兼容 Agent Skills 的工具**：使用 `.agents/skills/` 作為最通用位置；實際發現位置仍以該工具文件為準。
+- **未支援 Agent Skills 的 agent**：將 `SKILL.md` 加入 agent 的 system instructions，並在需要時一併提供 `references/status-model.md` 和 `references/output-schema.md`。這種方式不會自動觸發，也不會自動提供 GitHub 或 Google Drive 權限。
+
 ## 使用方法
 
 第一次使用時，請提供 repository allowlist。例如：
 
 ```text
 使用 @track-repository-progress，只檢查以下 repositories：
-- PatrickCOC/readbar
-- PatrickCOC/game_price_comparison
-- PatrickCOC/touch_fish
+- example-org/browser-tool
+- example-org/product-catalog
+- example-org/team-dashboard
 
 先產生報告，不要更新 Google Sheet。
 ```
@@ -162,15 +185,38 @@ Copy the `skill` directory into your personal skills directory and name it `trac
 
 Open a new session, then invoke it explicitly with `@track-repository-progress`. The exact personal skills directory depends on how Codex was installed.
 
+### Other AI Agents
+
+This skill follows the open Agent Skills directory structure. Copy the complete `skill` directory to the location supported by your agent, preserving the relative structure of `SKILL.md`, `references/`, and `agents/`.
+
+| Agent | Project-level | User-level |
+|---|---|---|
+| Generic Agent Skills | `.agents/skills/track-repository-progress/` | `~/.agents/skills/track-repository-progress/` |
+| Claude Code | `.claude/skills/track-repository-progress/` | `~/.claude/skills/track-repository-progress/` |
+| Cursor | `.cursor/skills/track-repository-progress/` or `.agents/skills/track-repository-progress/` | `~/.cursor/skills/track-repository-progress/` or `~/.agents/skills/track-repository-progress/` |
+| GitHub Copilot / VS Code | `.github/skills/track-repository-progress/` or `.agents/skills/track-repository-progress/` | `~/.copilot/skills/track-repository-progress/` or `~/.agents/skills/track-repository-progress/` |
+
+After copying the directory, verify that this file exists:
+
+```text
+<agent skills directory>/track-repository-progress/SKILL.md
+```
+
+- **Claude Code:** enter `/track-repository-progress`, or ask Claude to summarize progress for an explicit repository allowlist.
+- **Cursor:** type `/` in Agent chat and select the skill. Cursor may also select it automatically when the request matches its description.
+- **GitHub Copilot / VS Code:** invoke `/track-repository-progress` in Agent chat, or ask for a repository progress task that matches the skill description.
+- **Other Agent Skills-compatible tools:** prefer `.agents/skills/` as the portable location, but confirm the discovery path in that tool's documentation.
+- **Agents without Agent Skills support:** add `SKILL.md` to the agent's system instructions and provide `references/status-model.md` and `references/output-schema.md` when needed. This fallback does not provide automatic triggering or GitHub/Google Drive access.
+
 ## Usage
 
 Provide a repository allowlist the first time you use the skill. For example:
 
 ```text
 Use @track-repository-progress and inspect only these repositories:
-- PatrickCOC/readbar
-- PatrickCOC/game_price_comparison
-- PatrickCOC/touch_fish
+- example-org/browser-tool
+- example-org/product-catalog
+- example-org/team-dashboard
 
 Generate a report first. Do not update Google Sheets.
 ```
